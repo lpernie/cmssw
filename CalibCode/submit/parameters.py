@@ -7,7 +7,7 @@ ExternalGeometry   = 'caloGeometry.root'
 CalibType          = 'xtal'              # Calibrating single xtals. I never try but you could calibrate EtaRing ot Trigger Towers
 
 #Are Pi0
-Are_pi0            = True               # True = using Pi0, False = using Eta
+Are_pi0            = False               # True = using Pi0, False = using Eta
 #Fold per Eta Ring
 EtaRingCalibEB     = False
 SMCalibEB          = False
@@ -36,15 +36,15 @@ isMC = False
 MakeNtuple4optimization = False
 #InputList and Folder name
 inputlist_n      = 'InputList/2015B_AlCaP0Raw_good.list' # list of the input files
-dirname          = 'ALL_2015B_Weights_02'
+dirname          = 'ALL_2015B_Multifit_eta_01'
 Silent           = False                 # True->Fill modules is silent; False->Fill modules has a standard output
 #TAG, QUEUE and ITERS
-NameTag          = '2015B_'                   # Tag to the names to avoid overlap
-queueForDaemon   = 'cmscaf1nw'          # Option suggested: 2nw/2nd, 1nw/1nd, cmscaf1nw/cmscaf1nd... even cmscaf2nw
-queue            = 'cmscaf1nd'
-nIterations      = 10
+NameTag          = '2015Beta_'                   # Tag to the names to avoid overlap
+queueForDaemon   = '2nw'          # Option suggested: 2nw/2nd, 1nw/1nd, cmscaf1nw/cmscaf1nd... even cmscaf2nw
+queue            = '2nd'
+nIterations      = 13
 #N files
-ijobmax          = 5                     # 5 number of files per job
+ijobmax          = 3                     # 5 number of files per job
 nHadd            = 35                    # 35 number of files per hadd
 fastHadd         = True                  # From 7_4_X we can use this faster mathod. But files have to be copied on /tmp/ to be converted in .db
 if( isCRAB and isOtherT2 ):
@@ -237,7 +237,7 @@ FROMDIGI=False
 isMC               = False
 isNot_2010         = 'True'                                    # Fit Parameter Range
 HLTResults         = 'True'                                    # Fill the EB(EE) histos only is Eb()ee is fired: it uses GetHLTResults(iEvent, HLTResultsNameEB.Data() );
-json_file          = ''#'goodrunlist_json2015B.txt'               #/afs/cern.ch/cms/CAF/CMSALCA/ALCA_ECALCALIB/json_ecalonly/
+json_file          = 'goodrunlist_json2015Bred.txt'            #/afs/cern.ch/cms/CAF/CMSALCA/ALCA_ECALCALIB/json_ecalonly/
 overWriteGlobalTag = False                                     # Allow to overwrite AlphaTag, Laser correction etc
 doEnenerScale      = 'False'
 doIC               = 'False'                                   # Member of Recalibration Module
@@ -247,13 +247,13 @@ triggerTag         = 'InputTag("TriggerResults","","HLT")'    # Run Fill EB only
 hltL1GtObjectMap   = 'InputTag("hltL1GtObjectMap","","HLT")'
 useHLTFilter       = "True"                                   # Add to the path the request of a HLT path:  process.AlcaP0Filter.HLTPaths = 
 correctHits        = 'False'
-globaltag          = 'GR_P_V56::All'
-globaltag_New      = False
+globaltag          = 'GR_P_V56'
+globaltag_New      = True
 FROMDIGI           = True
 DigiCustomization  = False
-MULTIFIT           = False;   # Choose WEIGHTS or MULTIFIT (MULTIFIT is standard)
+MULTIFIT           = True;   # Choose WEIGHTS or MULTIFIT (MULTIFIT is standard)
 is50ns             = True      # If DigiCustomization and MULTIFIT is True
-WEIGHTS            = True;   # Choose WEIGHTS or MULTIFIT (MULTIFIT is standard)
+WEIGHTS            = False;   # Choose WEIGHTS or MULTIFIT (MULTIFIT is standard)
 if(Are_pi0):                                           # Member of Recalibration Module
    esInputTag = "InputTag('hltAlCaPi0RecHitsFilterEEonlyRegional','pi0EcalRecHitsES','HLT')"
    HLTPaths='AlCa_EcalPi0E*'                        # HLT Name to ask before running the event. It can contain a *.
