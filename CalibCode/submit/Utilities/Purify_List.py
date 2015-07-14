@@ -12,10 +12,10 @@ import subprocess, time, sys, os, string
 fileList = '../InputList/2015B_AlCaP0Raw.list'
 if not( os.path.isfile(fileList) ):
    print "WARNING!!! " + str(fileList) + " not found!"
-fileJson = '../../FillEpsilonPlot/data/goodrunlist_json2015B.txt'
+fileJson = '../../FillEpsilonPlot/data/goodrunlist_json2015Bred.txt'
 if not( os.path.isfile(fileJson) ):
    print "WARNING!!! " + str(fileJson) + " not found!"
-fileNEW = '../InputList/2015B_AlCaP0Raw_good2.list'
+fileNEW = '../InputList/2015B_AlCaP0Raw_good.list'
 if ( os.path.isfile(fileNEW) ):
    os.remove(fileNEW)
 #open

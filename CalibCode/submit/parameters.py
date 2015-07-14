@@ -7,7 +7,7 @@ ExternalGeometry   = 'caloGeometry.root'
 CalibType          = 'xtal'              # Calibrating single xtals. I never try but you could calibrate EtaRing ot Trigger Towers
 
 #Are Pi0
-Are_pi0            = False               # True = using Pi0, False = using Eta
+Are_pi0            = True               # True = using Pi0, False = using Eta
 #Fold per Eta Ring
 EtaRingCalibEB     = False
 SMCalibEB          = False
@@ -36,12 +36,12 @@ isMC = False
 MakeNtuple4optimization = False
 #InputList and Folder name
 inputlist_n      = 'InputList/2015B_AlCaP0Raw_good.list' # list of the input files
-dirname          = 'ALL_2015B_Multifit_eta_01'
+dirname          = 'ALL_2015B_Multifit_01'
 Silent           = False                 # True->Fill modules is silent; False->Fill modules has a standard output
 #TAG, QUEUE and ITERS
-NameTag          = '2015Beta_'                   # Tag to the names to avoid overlap
-queueForDaemon   = '2nw'          # Option suggested: 2nw/2nd, 1nw/1nd, cmscaf1nw/cmscaf1nd... even cmscaf2nw
-queue            = '2nd'
+NameTag          = '2015B_'                   # Tag to the names to avoid overlap
+queueForDaemon   = 'cmscaf1nw'          # Option suggested: 2nw/2nd, 1nw/1nd, cmscaf1nw/cmscaf1nd... even cmscaf2nw
+queue            = 'cmscaf1nd'
 nIterations      = 13
 #N files
 ijobmax          = 3                     # 5 number of files per job
