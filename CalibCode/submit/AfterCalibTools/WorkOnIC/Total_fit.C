@@ -192,7 +192,7 @@ void Total_fit( TString File, TString folder, TString Hname, bool RunOnAll, bool
     sprintf(line,"CMS Preliminary");
     lat.DrawLatex(0.2, 0.93, line);
     float xmin(0.5), yhi(0.80), ypass(0.05);
-    if(!Are_pi0_) yhi=0.20;
+    if(!Are_pi0_) xmin=0.30;
     sprintf(line,"m_{#gamma#gamma} = %.2f #pm %.2f", mean.getVal()*1000., mean.getError()*1000. );
     lat.DrawLatex(xmin,yhi, line);
     sprintf(line,"#sigma = %.2f #pm %.2f", sigma.getVal()*1000., sigma.getError()*1000. );

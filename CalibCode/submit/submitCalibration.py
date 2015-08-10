@@ -27,7 +27,6 @@ cfgHaddPath  = workdir + '/src/hadd'
 srcPath  = workdir + '/src'
 
 print "[calib] Creating local folders (" + dirname + ")"
-
 folderCreation = subprocess.Popen(['mkdir -p ' + workdir], stdout=subprocess.PIPE, shell=True);
 folderCreation.communicate()
 folderCreation = subprocess.Popen(['mkdir -p ' + workdir + '/cfgFile/'], stdout=subprocess.PIPE, shell=True);
@@ -48,6 +47,10 @@ folderCreation = subprocess.Popen(['mkdir -p ' + srcPath + '/Fit'], stdout=subpr
 folderCreation.communicate()
 folderCreation = subprocess.Popen(['mkdir -p ' + srcPath + '/hadd'], stdout=subprocess.PIPE, shell=True);
 folderCreation.communicate()
+
+print "[calib] Storing parameter.py for future reference"
+CopyParam = subprocess.Popen(['cp  parameters.py ' + workdir], stdout=subprocess.PIPE, shell=True);
+CopyParam.communicate()
 
 if( isOtherT2 and storageSite=="T2_BE_IIHE" and isCRAB ):
    print "[calib] Creating folders on PNFS"

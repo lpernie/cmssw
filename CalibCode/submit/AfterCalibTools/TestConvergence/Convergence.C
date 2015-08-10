@@ -49,9 +49,8 @@ static const int MAX_IPHI = 360;
 static const int MIN_IETA = 1;
 static const int MIN_IPHI = 1;
 
-//before: gROOT->ProcessLine(".include /afs/cern.ch/cms/slc5_ia32_gcc434/lcg/roofit/5.26.00-cms5/include")
 //5_3_6:  gROOT->ProcessLine(".include /afs/cern.ch/cms/slc5_amd64_gcc462/lcg/roofit/5.32.03-cms9/include/")
-//Usage: .x Convergence.C+("/store/group/alca_ecalcalib/lpernie/","ALL_2010_WithNEWSelection_01",6,"2012C_")
+//Usage: .x Convergence.C+("/store/group/dpg_ecal/alca_ecalcalib/lpernie/","ALL_2015B_Multifit_01",13,"2015B_")
 void Convergence( string Path_0, string Path, int nIter, string Tag, int nJump=1 ){
 
     string PathL = "root://eoscms//eos/cms" + Path_0 + Path;
@@ -125,13 +124,13 @@ void Convergence( string Path_0, string Path, int nIter, string Tag, int nJump=1
 		for(Long64_t iEntry=0; iEntry<nentries; iEntry++){
 		    Tree->GetEntry(iEntry);
 		    Tree1->GetEntry(iEntry);
-		    if( coeff1!=1. && coeff!=1. && coeff1!=coeff && coeff!=0 && coeff1!=0 && Ndof>10 && Ndof1>10){
+		    if( coeff1!=1. && coeff!=1. && coeff1!=coeff && coeff!=0 && coeff1!=0 /*&& Ndof>10 && Ndof1>10*/){
 			  if(isEB==0 ) h1->Fill((coeff1-coeff));
 			  if(isEB==1 ) h1->Fill((coeff1-coeff));
 		    }
 
 		    if(i==nIter-1){
-			  if(isEB==0 && coeff1!=1. && coeff!=1. && coeff1!=coeff && coeff!=0 && Ndof>10 && Ndof1>10){ 
+			  if(isEB==0 && coeff1!=1. && coeff!=1. && coeff1!=coeff && coeff!=0 /*&& Ndof>10 && Ndof1>10*/){ 
 				rms_EB->SetBinContent(iphi, ieta+86., fabs(coeff1-coeff)/coeff1);
 			  }
 			  if(isEB==1){

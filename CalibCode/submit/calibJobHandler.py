@@ -568,6 +568,7 @@ for iters in range(nIterations):
            Double_t Chisqu_;\
            Double_t Ndof_;\
            Double_t fit_mean_;\
+           Double_t fit_mean_err_;\
            Double_t fit_sigma_;\
            Double_t fit_Snorm_;\
            Double_t fit_b0_;\
@@ -595,6 +596,7 @@ for iters in range(nIterations):
            Double_t Chisqu_;\
            Double_t Ndof_;\
            Double_t fit_mean_;\
+           Double_t fit_mean_err_;\
            Double_t fit_sigma_;\
            Double_t fit_Snorm_;\
            Double_t fit_b0_;\
@@ -623,6 +625,7 @@ for iters in range(nIterations):
            Double_t Chisqu;\
            Double_t Ndof;\
            Double_t fit_mean;\
+           Double_t fit_mean_err;\
            Double_t fit_sigma;\
            Double_t fit_Snorm;\
            Double_t fit_b0;\
@@ -650,6 +653,7 @@ for iters in range(nIterations):
            Double_t Chisqu;\
            Double_t Ndof;\
            Double_t fit_mean;\
+           Double_t fit_mean_err;\
            Double_t fit_sigma;\
            Double_t fit_Snorm;\
            Double_t fit_b0;\
@@ -681,6 +685,7 @@ for iters in range(nIterations):
        TreeEB.Branch('Chisqu_'     , AddressOf(s,'Chisqu_'),'Chisqu_/F')
        TreeEB.Branch('Ndof_'       , AddressOf(s,'Ndof_'),'Ndof_/F')
        TreeEB.Branch('fit_mean_'   , AddressOf(s,'fit_mean_'),'fit_mean_/F')
+       TreeEB.Branch('fit_mean_err_'   , AddressOf(s,'fit_mean_err_'),'fit_mean_err_/F')
        TreeEB.Branch('fit_sigma_'  , AddressOf(s,'fit_sigma_'),'fit_sigma_/F')
        TreeEB.Branch('fit_Snorm_'  , AddressOf(s,'fit_Snorm_'),'fit_Snorm_/F')
        TreeEB.Branch('fit_b0_'     , AddressOf(s,'fit_b0_'),'fit_b0_/F')
@@ -706,6 +711,7 @@ for iters in range(nIterations):
        TreeEE.Branch('Chisqu_'     , AddressOf(t,'Chisqu_'),'Chisqu_/F')
        TreeEE.Branch('Ndof_'       , AddressOf(t,'Ndof_'),'Ndof_/F')
        TreeEE.Branch('fit_mean_'   , AddressOf(t,'fit_mean_'),'fit_mean_/F')
+       TreeEE.Branch('fit_mean_err_'   , AddressOf(t,'fit_mean_err_'),'fit_mean_err_/F')
        TreeEE.Branch('fit_sigma_'  , AddressOf(t,'fit_sigma_'),'fit_sigma_/F')
        TreeEE.Branch('fit_Snorm_'  , AddressOf(t,'fit_Snorm_'),'fit_Snorm_/F')
        TreeEE.Branch('fit_b0_'     , AddressOf(t,'fit_b0_'),'fit_b0_/F')
@@ -743,6 +749,7 @@ for iters in range(nIterations):
            thisTree.SetBranchAddress( 'Chisqu',AddressOf(s1,'Chisqu'));
            thisTree.SetBranchAddress( 'Ndof',AddressOf(s1,'Ndof'));
            thisTree.SetBranchAddress( 'fit_mean',AddressOf(s1,'fit_mean'));
+           thisTree.SetBranchAddress( 'fit_mean_err',AddressOf(s1,'fit_mean_err'));
            thisTree.SetBranchAddress( 'fit_sigma',AddressOf(s1,'fit_sigma'));
            thisTree.SetBranchAddress( 'fit_Snorm',AddressOf(s1,'fit_Snorm'));
            thisTree.SetBranchAddress( 'fit_b0',AddressOf(s1,'fit_b0'));
@@ -769,6 +776,7 @@ for iters in range(nIterations):
                    s.Chisqu_ = s1.Chisqu
                    s.Ndof_ = s1.Ndof
                    s.fit_mean_ = s1.fit_mean
+                   s.fit_mean_err_ = s1.fit_mean_err
                    s.fit_sigma_ = s1.fit_sigma
                    s.fit_Snorm_ = s1.fit_Snorm
                    s.fit_b0_ = s1.fit_b0
@@ -794,6 +802,7 @@ for iters in range(nIterations):
            thisTree.SetBranchAddress( 'Chisqu',AddressOf(t1,'Chisqu'));
            thisTree.SetBranchAddress( 'Ndof',AddressOf(t1,'Ndof'));
            thisTree.SetBranchAddress( 'fit_mean',AddressOf(t1,'fit_mean'));
+           thisTree.SetBranchAddress( 'fit_mean_err',AddressOf(t1,'fit_mean_err'));
            thisTree.SetBranchAddress( 'fit_sigma',AddressOf(t1,'fit_sigma'));
            thisTree.SetBranchAddress( 'fit_Snorm',AddressOf(t1,'fit_Snorm'));
            thisTree.SetBranchAddress( 'fit_b0',AddressOf(t1,'fit_b0'));
@@ -819,6 +828,7 @@ for iters in range(nIterations):
                    t.Chisqu_ = t1.Chisqu
                    t.Ndof_ = t1.Ndof
                    t.fit_mean_ = t1.fit_mean
+                   t.fit_mean_err_ = t1.fit_mean_err
                    t.fit_sigma_ = t1.fit_sigma
                    t.fit_Snorm_ = t1.fit_Snorm
                    t.fit_b0_ = t1.fit_b0

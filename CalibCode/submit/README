@@ -72,3 +72,9 @@ For more questions: luca.pernie@cern.ch
 
 Best,
 LP
+
+----To be edited into the .git/info/sparse-checkout---------------------
+/.gitignore/
+/CalibCode/
+/CondFormats/EcalObjects/
+/RecoLocalCalo/EcalRecProducers/

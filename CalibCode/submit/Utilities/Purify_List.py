@@ -15,7 +15,7 @@ if not( os.path.isfile(fileList) ):
 fileJson = '../../FillEpsilonPlot/data/goodrunlist_json2015Bred.txt'
 if not( os.path.isfile(fileJson) ):
    print "WARNING!!! " + str(fileJson) + " not found!"
-fileNEW = '../InputList/2015B_AlCaP0Raw_good.list'
+fileNEW = '../InputList/2015B_AlCaP0Raw_good.list2'
 if ( os.path.isfile(fileNEW) ):
    os.remove(fileNEW)
 #open

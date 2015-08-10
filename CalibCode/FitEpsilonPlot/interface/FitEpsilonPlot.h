@@ -93,6 +93,7 @@ class FitEpsilonPlot : public edm::EDAnalyzer {
       std::map<int,float> EBmap_Chisqu;
       std::map<int,float> EBmap_ndof;
       std::map<int,float> EBmap_mean;
+      std::map<int,float> EBmap_mean_err;
       std::map<int,float> EBmap_sigma;
       std::map<int,float> EBmap_Snorm;
       std::map<int,float> EBmap_b0;
@@ -106,6 +107,7 @@ class FitEpsilonPlot : public edm::EDAnalyzer {
       std::map<int,float> EEmap_Chisqu;
       std::map<int,float> EEmap_ndof;
       std::map<int,float> EEmap_mean;
+      std::map<int,float> EEmap_mean_err;
       std::map<int,float> EEmap_sigma;
       std::map<int,float> EEmap_Snorm;
       std::map<int,float> EEmap_b0;

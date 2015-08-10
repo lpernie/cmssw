@@ -260,6 +260,7 @@ void FitEpsilonPlot::saveCoefficients()
     float      Chisqu; 
     float      Ndof; 
     float      fit_mean;
+    float      fit_mean_err;
     float      fit_sigma;
     float      fit_Snorm;
     float      fit_b0;
@@ -297,6 +298,7 @@ void FitEpsilonPlot::saveCoefficients()
     treeEB->Branch("Chisqu",&Chisqu,"Chisqu/F");
     treeEB->Branch("Ndof",&Ndof,"Ndof/F");
     treeEB->Branch("fit_mean",&fit_mean,"fit_mean/F");
+    treeEB->Branch("fit_mean_err",&fit_mean_err,"fit_mean_err/F");
     treeEB->Branch("fit_sigma",&fit_sigma,"fit_sigma/F");
     treeEB->Branch("fit_Snorm",&fit_Snorm,"fit_Snorm/F");
     treeEB->Branch("fit_b0",&fit_b0,"fit_b0/F");
@@ -321,6 +323,7 @@ void FitEpsilonPlot::saveCoefficients()
     treeEE->Branch("Chisqu",&Chisqu,"Chisqu/F");
     treeEE->Branch("Ndof",&Ndof,"Ndof/F");
     treeEE->Branch("fit_mean",&fit_mean,"fit_mean/F");
+    treeEE->Branch("fit_mean_err",&fit_mean_err,"fit_mean_err/F");
     treeEE->Branch("fit_sigma",&fit_sigma,"fit_sigma/F");
     treeEE->Branch("fit_Snorm",&fit_Snorm,"fit_Snorm/F");
     treeEE->Branch("fit_b0",&fit_b0,"fit_b0/F");
@@ -346,7 +349,8 @@ void FitEpsilonPlot::saveCoefficients()
 		Backgr = EBmap_Backgr[ebid.hashedIndex()];
 		Chisqu = EBmap_Chisqu[ebid.hashedIndex()];
 		Ndof = EBmap_ndof[ebid.hashedIndex()];
-		fit_mean   = EBmap_mean[ebid.hashedIndex()];
+		fit_mean     = EBmap_mean[ebid.hashedIndex()];
+		fit_mean_err = EBmap_mean_err[ebid.hashedIndex()];
 		fit_sigma  = EBmap_sigma[ebid.hashedIndex()];
 		fit_Snorm  = EBmap_Snorm[ebid.hashedIndex()];
 		fit_b0     = EBmap_b0[ebid.hashedIndex()];
@@ -380,7 +384,8 @@ void FitEpsilonPlot::saveCoefficients()
 		Backgr = EEmap_Backgr[eeid.hashedIndex()];
 		Chisqu = EEmap_Chisqu[eeid.hashedIndex()];            
 		Ndof = EEmap_ndof[eeid.hashedIndex()];            
-		fit_mean   = EEmap_mean[eeid.hashedIndex()];
+		fit_mean     = EEmap_mean[eeid.hashedIndex()];
+		fit_mean_err = EEmap_mean_err[eeid.hashedIndex()];
 		fit_sigma  = EEmap_sigma[eeid.hashedIndex()];
 		fit_Snorm  = EEmap_Snorm[eeid.hashedIndex()];
 		fit_b0     = EEmap_b0[eeid.hashedIndex()];
@@ -767,6 +772,7 @@ Pi0FitResult FitEpsilonPlot::FitMassPeakRooFit(TH1F* h, double xlo, double xhi, 
 	  EBmap_Chisqu[HistoIndex]=xframe->chiSquare();
 	  EBmap_ndof[HistoIndex]=ndof;
 	  EBmap_mean[HistoIndex]=mean.getVal();
+	  EBmap_mean_err[HistoIndex]=mean.getError();
 	  EBmap_sigma[HistoIndex]=sigma.getVal();
 	  EBmap_Snorm[HistoIndex]=normSig;
 	  EBmap_b0[HistoIndex]=cb0.getVal();
@@ -781,6 +787,7 @@ Pi0FitResult FitEpsilonPlot::FitMassPeakRooFit(TH1F* h, double xlo, double xhi, 
 	  EEmap_Chisqu[HistoIndex]=xframe->chiSquare();
 	  EEmap_ndof[HistoIndex]=ndof;
 	  EEmap_mean[HistoIndex]=mean.getVal();
+	  EEmap_mean_err[HistoIndex]=mean.getError();
 	  EEmap_sigma[HistoIndex]=sigma.getVal();
 	  EEmap_Snorm[HistoIndex]=normSig;
 	  EEmap_b0[HistoIndex]=cb0.getVal();
