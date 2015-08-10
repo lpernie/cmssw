@@ -36,13 +36,13 @@ isMC = False
 MakeNtuple4optimization = False
 #InputList and Folder name
 inputlist_n      = 'InputList/2015B_AlCaP0Raw_good.list' # list of the input files
-dirname          = 'ALL_2015B_Multifit_01'
+dirname          = 'ALL_2015B_Multifit_noLasProb_74X_dataRun2_Prompt_v0_01'
 Silent           = False                 # True->Fill modules is silent; False->Fill modules has a standard output
 #TAG, QUEUE and ITERS
 NameTag          = '2015B_'                   # Tag to the names to avoid overlap
 queueForDaemon   = 'cmscaf1nw'          # Option suggested: 2nw/2nd, 1nw/1nd, cmscaf1nw/cmscaf1nd... even cmscaf2nw
 queue            = 'cmscaf1nd'
-nIterations      = 13
+nIterations      = 14
 #N files
 ijobmax          = 3                     # 5 number of files per job
 nHadd            = 35                    # 35 number of files per hadd
@@ -247,7 +247,7 @@ triggerTag         = 'InputTag("TriggerResults","","HLT")'    # Run Fill EB only
 hltL1GtObjectMap   = 'InputTag("hltL1GtObjectMap","","HLT")'
 useHLTFilter       = "True"                                   # Add to the path the request of a HLT path:  process.AlcaP0Filter.HLTPaths = 
 correctHits        = 'False'
-globaltag          = 'GR_P_V56'
+globaltag          = '74X_dataRun2_Prompt_v0' #old is GR_P_V56
 globaltag_New      = True
 FROMDIGI           = True
 DigiCustomization  = False
