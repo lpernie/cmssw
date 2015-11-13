@@ -3,6 +3,8 @@
 import subprocess, time, sys, os
 from methods import *
 
+EOS_comm = "/afs/cern.ch/project/eos/installation/0.3.84-aquamarine/bin/eos.select" # eos ls is not recognized. I use the path I got from 'which eos'
+
 mode = str(sys.argv[1])
 if( isOtherT2 and storageSite=="T2_BE_IIHE" and isCRAB ):  # Beacause in IIHE the pwd give a link to the area, and you don't want that
     pwd         = os.getenv('PWD')
@@ -21,11 +23,11 @@ elif ( mode.find('BATCH_RESU') != -1 ):                                   # Batc
        sys.exit(1)
 else:                                                                                 # CRAB
     if len(sys.argv) != 6:
-       print "usage thisPyton.py CRAB currentITER queue (bsub -q " + queueForDaemon + " 'source " + pwd + "/" + dirname + "/CRAB_files/HaddSendafterCrab_XXX.sh')"
+       print "usage thisPyton.py CRAB currentITER queue (bsub -C 900 -q " + queueForDaemon + " 'source " + pwd + "/" + dirname + "/CRAB_files/HaddSendafterCrab_XXX.sh')"
        print "or"
-       print "Change CRAB with CRAB_RESU_FinalHadd in: (bsub -q " + queueForDaemon + " 'source " + pwd + "/" + dirname + "/CRAB_files/HaddSendafterCrab_XXX.sh')"
+       print "Change CRAB with CRAB_RESU_FinalHadd in: (bsub -C 900 -q " + queueForDaemon + " 'source " + pwd + "/" + dirname + "/CRAB_files/HaddSendafterCrab_XXX.sh')"
        print "or"
-       print "Change CRAB with CRAB_RESU_FitOnly in: (bsub -q " + queueForDaemon + " 'source " + pwd + "/" + dirname + "/CRAB_files/HaddSendafterCrab_XXX.sh')"
+       print "Change CRAB with CRAB_RESU_FitOnly in: (bsub -C 9000 -q " + queueForDaemon + " 'source " + pwd + "/" + dirname + "/CRAB_files/HaddSendafterCrab_XXX.sh')"
        sys.exit(1)
 #Selec what mode you are running
 RunCRAB = True; RunBatch = True; RunResub = True;
@@ -96,9 +98,9 @@ for iters in range(nIterations):
             fill_src_n = srcPath + "/Fill/submit_iter_"     + str(iters) + "_job_" + str(ijob) + ".sh"
             submit_s=""
             if not(Silent):
-                 submit_s = "bsub -q " + queue + " -o " + fill_log_n + " " + fill_src_n
+                 submit_s = "bsub -C 900 -q " + queue + " -o " + fill_log_n + " " + fill_src_n
             else:
-                 submit_s = "bsub -q " + queue + " -o /dev/null -e /dev/null " + fill_src_n
+                 submit_s = "bsub -C 900 -q " + queue + " -o /dev/null -e /dev/null " + fill_src_n
 
             print '\n[job #' + str(ijob) + '] :: ' + submit_s
 
@@ -136,8 +138,8 @@ for iters in range(nIterations):
         if( storageSite=="T2_CH_CERN" ):
            for Extra_path in ListPaths:
                print 'LETS TRY: ' + Extra_path
-               print 'Getting Good file: ' + "cmsLs " + eosPath + "/" + dirname + "/iter_" + str(iters) + "/" + Extra_path + " | awk '{print $5}' | grep root | grep -v epsilonPlots | grep -v Barrel | grep -v Endcap | grep " + outputFile +"_"
-               getGoodfile = subprocess.Popen(["cmsLs " + eosPath + "/" + dirname + "/iter_" + str(iters) + "/" + Extra_path +  " | awk '{print $5}' | grep root | grep -v epsilonPlots | grep -v Barrel | grep -v Endcap | grep " + outputFile + "_" ], stdout=subprocess.PIPE, shell=True)
+               print 'Getting Good file: ' + EOS_comm + " ls " + eosPath + "/" + dirname + "/iter_" + str(iters) + "/" + Extra_path + " | awk '{print $5}' | grep root | grep -v epsilonPlots | grep -v Barrel | grep -v Endcap | grep " + outputFile +"_"
+               getGoodfile = subprocess.Popen([EOS_comm + " ls " + eosPath + "/" + dirname + "/iter_" + str(iters) + "/" + Extra_path +  " | awk '{print $5}' | grep root | grep -v epsilonPlots | grep -v Barrel | grep -v Endcap | grep " + outputFile + "_" ], stdout=subprocess.PIPE, shell=True)
                getGoodfile_c = getGoodfile.communicate()
                getGoodfile_str += str(getGoodfile_c)
         if( isOtherT2 and storageSite=="T2_BE_IIHE" ):
@@ -230,7 +232,7 @@ for iters in range(nIterations):
         for nHadds in range(Nlist):
             Hadd_src_n = srcPath + "/hadd/HaddCfg_iter_" + str(iters) + "_job_" + str(nHadds) + ".sh"
             Hadd_log_n = logPath + "/HaddCfg_iter_" + str(iters) + "_job_" + str(nHadds) + ".log"
-            Hsubmit_s = "bsub -q " + queue + " -o " + Hadd_log_n + " bash " + Hadd_src_n
+            Hsubmit_s = "bsub -C 900 -q " + queue + " -o " + Hadd_log_n + " bash " + Hadd_src_n
             if( isOtherT2 and storageSite=="T2_BE_IIHE" and isCRAB ):
                Hsubmit_s = "qsub -q localgrid@cream02 -o /dev/null -e /dev/null " +  Hadd_src_n
             #Before each HADD we need ot check if the all the files in the list are present
@@ -250,7 +252,7 @@ for iters in range(nIterations):
                   FoutGrep_2 = str(FoutGrep_2)[:-11]
                else:
                   FoutGrep_2 = str(FoutGrep_2)[:-10]
-               print 'Checking ' + str(FoutGrep_2)
+               print 'Checking: ' + str(FoutGrep_2)
                #Chech The size for each line
                f = open( str(FoutGrep_2) )
                lines = f.readlines()
@@ -265,11 +267,11 @@ for iters in range(nIterations):
                       lines = f2.readlines()
                       f2.close()
                    filetoCheck2 = str(filetoCheck)[22:]
-                   CheckComm = 'cmsLs -l ' + str(filetoCheck2)
+                   CheckComm = EOS_comm + ' ls -l ' + str(filetoCheck2)
                    myCheck =  subprocess.Popen([CheckComm], stdout=subprocess.PIPE, shell=True )
                    Check_output = myCheck.communicate()
-                   #If file is not present, remove it from the list
-                   if "No such" in str(Check_output):
+                   #If file is not present, remove it from the list. In this case the eos ls -l command give a array of 2.
+                   if (len(str(Check_output).split( ))<4):
                       print 'HADD::MISSING: ' + str(filetoCheck2)
                       print 'removing from Hadd, in: ' + str(FoutGrep_2) + str(NumToRem)
                       f1 = open(str(FoutGrep_2) + str(NumToRem),"w")
@@ -280,9 +282,9 @@ for iters in range(nIterations):
                       f1.close()
                    else:
                       Splitted =  str(Check_output).split( );
-                      print "size: " + str(Splitted[1])
+                      print "Size is: " + str(Splitted[4]) ###Was 1
                       #If is corrupted (size too small), remove it from the list
-                      if( int(Splitted[1])<10000 ):
+                      if( int(Splitted[4])<10000 ):
                            print 'HADD::Bad size for: ' + str(filetoCheck2)
                            print 'removing from Hadd, in: ' + str(FoutGrep_2) + str(NumToRem)
                            f1 = open(str(FoutGrep_2) + str(NumToRem),"w+")
@@ -340,7 +342,7 @@ for iters in range(nIterations):
         if( isOtherT2 and storageSite=="T2_BE_IIHE" and isCRAB ):
              FHsubmit_s = "qsub -q localgrid@cream02 -o /dev/null -e /dev/null " + FHadd_src_n
         else:
-             FHsubmit_s = "bsub -q " + queue + " -o " + FHadd_log_n + " bash " + FHadd_src_n
+             FHsubmit_s = "bsub -C 900  -q " + queue + " -o " + FHadd_log_n + " bash " + FHadd_src_n
         FsubJobs = subprocess.Popen([FHsubmit_s], stdout=subprocess.PIPE, shell=True);
         FoutJobs = FsubJobs.communicate()
         print FoutJobs
@@ -431,7 +433,7 @@ for iters in range(nIterations):
             submit_s = "qsub -q localgrid@cream02 -o /dev/null -e /dev/null " + fit_src_n
             ListFinaHaddEB.append("dcap://maite.iihe.ac.be/pnfs/iihe/cms" + outLFN + "/iter_" + str(iters) + '/' + NameTag + 'Barrel_'+str(inteb) + '_' + calibMapName)
         else:
-            submit_s = "bsub -q " + queue + " -o /dev/null -e /dev/null " + fit_src_n
+            submit_s = "bsub -C 900 -q " + queue + " -o /dev/null -e /dev/null " + fit_src_n
             ListFinaHaddEB.append('root://eoscms//eos/cms' + eosPath + '/' + dirname + '/iter_' + str(iters) + '/' + Add_path + '/' + NameTag + 'Barrel_'+str(inteb)+'_' + calibMapName )
         print 'About to EB fit:'
         print 'root://eoscms//eos/cms' + eosPath + '/' + dirname + '/iter_' + str(iters) + '/' + Add_path + '/' + NameTag + 'Barrel_'+str(inteb)+'_' + calibMapName
@@ -489,7 +491,7 @@ for iters in range(nIterations):
             submit_s = "qsub -q localgrid@cream02 -o /dev/null -e /dev/null " + fit_src_n
             ListFinaHaddEE.append("dcap://maite.iihe.ac.be/pnfs/iihe/cms" + outLFN + "/iter_" + str(iters) + '/' + NameTag + 'Endcap_'+str(inte) + '_' + calibMapName)
         else:
-            submit_s = "bsub -q " + queue + " -o /dev/null -e /dev/null " + fit_src_n
+            submit_s = "bsub -C 900 -q " + queue + " -o /dev/null -e /dev/null " + fit_src_n
             ListFinaHaddEE.append('root://eoscms//eos/cms' + eosPath + '/' + dirname + '/iter_' + str(iters) + '/' + Add_path + '/' + NameTag + 'Endcap_'+str(inte) + '_' + calibMapName)
         print 'About to EE fit:'
         print 'root://eoscms//eos/cms' + eosPath + '/' + dirname + '/iter_' + str(iters) + '/' + Add_path + '/' + NameTag + 'Endcap_'+str(inte) + '_' + calibMapName
@@ -891,7 +893,7 @@ for iters in range(nIterations):
 
     # checking that calibMap.root is actually available on EOS
     print "Checking availabilty of " + NameTag + calibMapName
-    checkFileAvailability_s = 'cmsLs ' + eosPath + '/' + dirname + '/iter_' + str(iters) + "/" + NameTag + calibMapName
+    checkFileAvailability_s = EOS_comm + ' ls ' + eosPath + '/' + dirname + '/iter_' + str(iters) + "/" + NameTag + calibMapName
     print checkFileAvailability_s
     checkFileAvailability = subprocess.Popen([checkFileAvailability_s], stdout=subprocess.PIPE, shell=True);
     output = checkFileAvailability.communicate()[0]
