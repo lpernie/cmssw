@@ -35,9 +35,9 @@ if(isCRAB):
 isMC = False
 MakeNtuple4optimization = False
 #InputList and Folder name
-inputlist_n      = 'InputList/2015D_good_OnlyWorking.list' # list of the input files
+inputlist_n      = 'InputList/2015D_good.list' # list of the input files
 #inputlist_n      = 'InputList/2015D_good.list' # list of the input files
-dirname          = 'ALL_2015D_Multifit_7412p4_74X_dataRun2_Prompt_v2_GoldORSilverJson_03'
+dirname          = 'ALL_2015D_Multifit_7412p4_74X_dataRun2_Prompt_v2_GoldORSilverJson_ALL01'
 Silent           = False                 # True->Fill modules is silent; False->Fill modules has a standard output
 #TAG, QUEUE and ITERS
 NameTag          = '2015D_'              # Tag to the names to avoid overlap
