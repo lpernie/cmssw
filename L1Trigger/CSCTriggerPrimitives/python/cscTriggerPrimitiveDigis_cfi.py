@@ -215,7 +215,7 @@ cscTriggerPrimitiveDigis = cms.EDProducer("CSCTriggerPrimitivesProducer",
         clctNplanesHitPretrig = cms.uint32(3),
         clctNplanesHitPattern = cms.uint32(4),
         # increase pattern ID threshold from 2 to 4 to trigger higher pt tracks
-        clctPidThreshPretrig  = cms.uint32(4),
+        clctPidThreshPretrig  = cms.uint32(2),
         # decrease possible minimal #HS distance between two CLCTs in a BX from 10 to 5:
         clctMinSeparation     = cms.uint32(5),
         # Debug
@@ -228,12 +228,12 @@ cscTriggerPrimitiveDigis = cms.EDProducer("CSCTriggerPrimitivesProducer",
         useDeadTimeZoning = cms.bool(True),
 
         # Width (in #HS) of a fixed dead zone around a key HS:
-        clctStateMachineZone = cms.uint32(8),
+        clctStateMachineZone = cms.uint32(4),
 
         # Enables the algo which instead of using the fixed dead zone width,
         # varies it depending on the width of a triggered CLCT pattern
         # (if True, the clctStateMachineZone is ignored):
-        useDynamicStateMachineZone = cms.bool(True),
+        useDynamicStateMachineZone = cms.bool(False),
 
         # Pretrigger HS +- clctPretriggerTriggerZone sets the trigger matching zone
         # which defines how far from pretrigger HS the TMB may look for a trigger HS
@@ -277,7 +277,7 @@ cscTriggerPrimitiveDigis = cms.EDProducer("CSCTriggerPrimitivesProducer",
         #         take CLCTs in BX look for matching ALCTs in window)
         #  False = ALCT-centric matching (recommended for SLHC,
         #         take ALCTs in BX look for matching CLCTs in window)
-        clctToAlct = cms.bool(True),
+        clctToAlct = cms.bool(False),
     ),
 
     # to be used by ME11 chambers with upgraded TMB and ALCT
@@ -287,7 +287,7 @@ cscTriggerPrimitiveDigis = cms.EDProducer("CSCTriggerPrimitivesProducer",
         clctTrigEnable  = cms.uint32(0),
         matchTrigEnable = cms.uint32(1),
         # reduce ALCT-CLCT matching window size from 7 to 3
-        matchTrigWindowSize = cms.uint32(3),
+        matchTrigWindowSize = cms.uint32(7),
         tmbL1aWindowSize = cms.uint32(7),
         # Debug
         verbosity = cms.int32(0),

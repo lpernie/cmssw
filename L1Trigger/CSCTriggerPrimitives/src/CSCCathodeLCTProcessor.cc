@@ -713,6 +713,7 @@ void CSCCathodeLCTProcessor::run(
   if (isTMB07) {
     // Upgrade version for ME11 with better dead-time handling
     if (isSLHC && smartME1aME1b && isME11 && use_dead_time_zoning) LCTlist = findLCTsSLHC(halfstrip);
+    //##1## if (false && smartME1aME1b && isME11 && use_dead_time_zoning) LCTlist = findLCTsSLHC(halfstrip);
     // TMB07 version of the CLCT algorithm.
     else LCTlist = findLCTs(halfstrip);
   }

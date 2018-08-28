@@ -134,11 +134,14 @@ class CSCMotherboard
       if false: do ALCT-to-CLCT matching */
   bool clct_to_alct;
 
+  unsigned int alctClctOffset;
+
   /** Default values of configuration parameters. */
   static const unsigned int def_mpc_block_me1a;
   static const unsigned int def_alct_trig_enable, def_clct_trig_enable;
   static const unsigned int def_match_trig_enable, def_match_trig_window_size;
   static const unsigned int def_tmb_l1a_window_size;
+  static const unsigned int def_alctClctOffset;
 
   /** Container for first correlated LCT. */
   CSCCorrelatedLCTDigi firstLCT[CSCConstants::MAX_LCT_TBINS];
