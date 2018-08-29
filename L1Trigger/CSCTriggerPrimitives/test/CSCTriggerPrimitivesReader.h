@@ -46,11 +46,13 @@ struct MyStubComparison
 {
 
 
-  void init(); // initialize to default values
+  void init(int run, int event); // initialize to default values
   TTree *bookTree(TTree *t, const std::string & name = "Stub_compare");
 
 
   Int_t nEvents;
+  Int_t nRUN;
+  Int_t nEvent;
   Int_t totStubs_data;
   Int_t totStubs_emul;
   Int_t nStub_data;
@@ -72,10 +74,12 @@ struct MyStubComparison
   Int_t bx_corr_emul;//corrected
   Int_t npretrig;
   Int_t quality_pretrig;
+  Int_t maxquality_pretrig;
   Int_t bend_pretrig;
   Int_t bx_pretrig;
   Int_t key_hs_pretrig;  
   Int_t pattern_pretrig;  
+  Int_t maxpattern_pretrig;  
   Int_t fullbx_data;
   Int_t fullbx_emul;
   Int_t pattern_data;
@@ -122,7 +126,10 @@ class CSCTriggerPrimitivesReader : public edm::EDAnalyzer
   int eventsAnalyzed;       // event number
   bool debug;               // on/off switch
   std::string rootFileName; // root file name
-  //  TFile *theFile;
+
+  // Run number, Event number
+  int RUN_;
+  int Event_;
 
   // Cache geometry for current event
   const CSCGeometry* geom_;
